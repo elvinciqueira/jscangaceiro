@@ -9,18 +9,15 @@ class NegociacaoController {
   adiciona(event) {
     event.preventDefault();
 
-    const data = new Date(
-      ...this._inputData.value
-        .split('-')
-        .map((item, indice) => item - (indice % 2))
-    );
-
     const negociacao = new Negociacao(
-      data,
+      DataConverter.paraData(this._inputData.value),
       parseInt(this._inputQuantidade.value),
       parseFloat(this._inputValor.value)
     );
 
+    const diaMesAno = DataConverter.paraTexto(negociacao.data);
+
+    console.log(diaMesAno);
     console.log(negociacao);
   }
 }
