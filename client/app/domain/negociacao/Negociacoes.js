@@ -10,4 +10,12 @@ class Negociacoes {
   paraArray() {
     return [].concat(this._negociacoes);
   }
+
+  get volumeTotal() {
+    return this._negociacoes.reduce(
+      (totalNegociacoes, negociacaoAtual) =>
+        totalNegociacoes + negociacaoAtual.volume,
+      0
+    );
+  }
 }
