@@ -8,12 +8,15 @@ class DataConverter {
   }
 
   static paraData(texto) {
-    const dataEhInvalida = !/^\d{4}-\d{2}-\d{2}$/.test(texto);
+    const dataEhInvalida = !/\d{2}\/\d{2}\/\d{4}/.test(texto);
 
-    if (dataEhInvalida) throw new Error('Deve estar no formato aaaa-mm-dd');
+    if (dataEhInvalida) throw new DataInvalidaException();
 
     return new Date(
-      ...texto.split('-').map((item, indice) => item - (indice % 2))
+      ...texto
+        .split('/')
+        .reverse()
+        .map((item, indice) => item - (indice % 2))
     );
   }
 }
